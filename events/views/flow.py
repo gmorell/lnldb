@@ -243,7 +243,7 @@ def reviewremind(request, id, uid):
         if send_notification and prefs.cc_report_reminders in ['slack', 'all']:
             message = "This is a reminder that you have a pending crew chief report for %s." % event.event_name
             blocks = cc_report_reminder(cci)
-            slack_user = lookup_user(cci.crew_chief.email)
+            slack_user = lookup_user(cci.crew_chief)
             if slack_user:
                 slack_post(slack_user, text=message, content=blocks)
         messages.add_message(request, messages.INFO, 'Reminder Sent')
@@ -286,7 +286,7 @@ def remindall(request, id):
         if prefs.cc_report_reminders in ['slack', 'all']:
             message = "This is a reminder that you have a pending crew chief report for %s." % event.event_name
             blocks = cc_report_reminder(cci)
-            slack_user = lookup_user(cci.crew_chief.email)
+            slack_user = lookup_user(cci.crew_chief)
             if slack_user:
                 slack_post(slack_user, text=message, content=blocks)
 
