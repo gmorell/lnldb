@@ -73,6 +73,7 @@ def approval(request, id):
             e.approved = True
             e.approved_on = timezone.now()
             e.approved_by = request.user
+            e.event_status = "Confirmed"
             e.save()
             form.save_m2m()
             if is_event2019:
@@ -188,6 +189,7 @@ def review(request, id):
             e.reviewed = True
             e.reviewed_on = timezone.now()
             e.reviewed_by = request.user
+            e.event_status = "Post Event"
             e.save()
             form.save_m2m()
             # Remove prefilled hours that were never finished
